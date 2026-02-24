@@ -37,7 +37,8 @@ ENV LD_LIBRARY_PATH=${TOOL_ROOT}/gcc-15.1.0/lib64:${TOOL_ROOT}/qt-5.7.1/lib
 
 # 创建软链接（方便直接使用 gcc/g++）
 RUN ln -s ${TOOL_ROOT}/gcc-15.1.0/bin/gcc-15 ${TOOL_ROOT}/gcc-15.1.0/bin/gcc && \
-    ln -s ${TOOL_ROOT}/gcc-15.1.0/bin/g++-15 ${TOOL_ROOT}/gcc-15.1.0/bin/g++
+    ln -s ${TOOL_ROOT}/gcc-15.1.0/bin/g++-15 ${TOOL_ROOT}/gcc-15.1.0/bin/g++ && \
+	ln -s ${TOOL_ROOT}/gcc-15.1.0/bin/gcov-15 ${TOOL_ROOT}/gcc-15.1.0/bin/gcov
 	
 # 最终验证（构建时报错即停止）
 RUN gcc -v && cmake --version && qmake -version
