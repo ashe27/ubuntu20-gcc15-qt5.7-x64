@@ -1,4 +1,21 @@
-FROM ghcr.io/ashe27/ubuntu20-base-x64:latest
+ARG BASE_IMAGE=ghcr.io/ashe27/ubuntu20-base-x64:latest
+
+FROM ${BASE_IMAGE}
+
+# 默认设为 0（代表不使用国内源，供 GitHub 使用）
+ARG USE_CHINA_MIRROR=0
+
+# 根据传入的参数决定是否替换源
+RUN echo "当前 USE_CHINA_MIRROR 的值为: ${USE_CHINA_MIRROR}" && \
+    if [ "${USE_CHINA_MIRROR}" = "1" ]; then \
+        echo "deb http://mirrors.aliyun.com/ubuntu/ focal main restricted universe multiverse" > /etc/apt/sources.list && \
+        echo "deb http://mirrors.aliyun.com/ubuntu/ focal-updates main restricted universe multiverse" >> /etc/apt/sources.list && \
+        echo "deb http://mirrors.aliyun.com/ubuntu/ focal-backports main restricted universe multiverse" >> /etc/apt/sources.list && \
+        echo "deb http://mirrors.aliyun.com/ubuntu/ focal-security main restricted universe multiverse" >> /etc/apt/sources.list && \
+        mkdir -p /root/.pip && \
+        echo "[global]" > /root/.pip/pip.conf && \
+        echo "index-url = https://mirrors.aliyun.com/pypi/simple/" >> /root/.pip/pip.conf; \
+    fi
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git-lfs \
