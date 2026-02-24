@@ -16,7 +16,7 @@ ADD qt5.7.1-gcc5.4.0-linux-x86_64.tar.xz .
 # 配置环境变量
 ENV TOOL_ROOT=/opt
 ENV PATH=${TOOL_ROOT}/gcc-15.1.0/bin:${TOOL_ROOT}/cmake-4.2.3-linux-x86_64/bin:${TOOL_ROOT}/qt-5.7.1/bin:$PATH
-ENV LD_LIBRARY_PATH=${TOOL_ROOT}/gcc-15.1.0/lib64:${TOOL_ROOT}/qt-5.7.1/lib:$LD_LIBRARY_PATH
+ENV LD_LIBRARY_PATH=${TOOL_ROOT}/gcc-15.1.0/lib64:${TOOL_ROOT}/qt-5.7.1/lib
 
 # 创建软链接（方便直接使用 gcc/g++）
 RUN ln -s ${TOOL_ROOT}/gcc-15.1.0/bin/gcc-15 ${TOOL_ROOT}/gcc-15.1.0/bin/gcc && \
